@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import './Notes.css';
 
 export default function Notes() {
   const [notes, setNotes] = useState([]);
@@ -29,14 +30,17 @@ export default function Notes() {
   }, []);
 
   return (
-    <div>
+    <div className="card">
       <h2>Your Notes</h2>
-      <input value={newNote} onChange={(e) => setNewNote(e.target.value)} placeholder="New note" />
-      <button onClick={addNote}>Add Note</button>
-      <ul>
+      <div className="input-group">
+        <input value={newNote} onChange={(e) => setNewNote(e.target.value)} placeholder="New note" />
+        <button className="btn add" onClick={addNote}>Add</button>
+      </div>
+      <ul className="note-list">
         {notes.map(note => (
-          <li key={note.id}>
-            {note.text} <button onClick={() => deleteNote(note.id)}>❌</button>
+          <li key={note.id} className="note-item">
+            <span>{note.text}</span>
+            <button className="btn delete" onClick={() => deleteNote(note.id)}>❌</button>
           </li>
         ))}
       </ul>

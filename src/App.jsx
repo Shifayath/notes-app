@@ -6,7 +6,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   return (
-    <div>
+    <div className="app-container">
       {user ? <Notes /> : <Login onLogin={(user) => setUser(user)} />}
     </div>
   );
